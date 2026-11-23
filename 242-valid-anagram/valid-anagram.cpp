@@ -1,23 +1,26 @@
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        if (s.length() != t.length()) {
+
+        if(s.length() != t.length()){
             return false;
         }
 
-        unordered_map<char, int> counter;
+        vector<int> count(26, 0);
 
-        for (char ch : s) {
-            counter[ch] = counter[ch] + 1;
+        for(int i = 0; i < s.length(); i++){
+
+            count[s[i] - 'a']++;
+            count[t[i] - 'a']--;
         }
 
-        for (char ch : t) {
-            if (counter.find(ch) == counter.end() || counter[ch] == 0) {
+        for(int num : count){
+
+            if(num != 0){
                 return false;
             }
-            counter[ch] = counter[ch] - 1;
         }
 
-        return true;        
+        return true;
     }
 };
